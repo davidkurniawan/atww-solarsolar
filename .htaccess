@@ -1,0 +1,33 @@
+<IfModule LiteSpeed>
+###LSCACHE START PLUGIN - Do not edit the contents of this block!###
+RewriteEngine on
+RewriteRule (.*) - [E=Cache-Control:no-cache]
+</IfModule>
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+RewriteCond %{HTTP_HOST} ^atw\-sejahtera\.co\.id$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.atw\-sejahtera\.co\.id$
+RewriteRule ^wp\/$ "http\:\/\/www\.atw\-sejahtera\.co\.id\/" [R=301,L]
+RewriteCond %{HTTP_HOST} ^atw\-solar\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.atw\-solar\.com$
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^/?$ "http\:\/\/www\.atw\-sejahtera\.co\.id\/" [R=301,L]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php56” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddType application/x-httpd-ea-php56 .php .php5 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
